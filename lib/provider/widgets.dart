@@ -1,8 +1,7 @@
-import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/screens/Shipping_Address_Screens/Select_Shipping_Address.dart';
-import 'package:untitled/screens/Shipping_Address_Screens/Select_new_Address.dart';
+import 'package:untitled/screens/disc_create/disc_create_screen.dart';
 
 class widget {
   double fontsize = 16;
@@ -73,18 +72,17 @@ class widget {
             decoration: InputDecoration(
               suffixIcon: PopupMenuButton<String>(
                 padding: EdgeInsets.all(0),
-      icon: const Icon(Icons.arrow_drop_down),
-      onSelected: (String value) {
-        ctr.text = value;
-      },
-      itemBuilder: (BuildContext context) {
-        return itm
-            .map<PopupMenuItem<String>>((String value) {
-          return new PopupMenuItem(
-              child: new Text(value), value: value);
-        }).toList();
-      },
-    ),
+                icon: const Icon(Icons.arrow_drop_down),
+                onSelected: (String value) {
+                  ctr.text = value;
+                },
+                itemBuilder: (BuildContext context) {
+                  return itm.map<PopupMenuItem<String>>((String value) {
+                    return new PopupMenuItem(
+                        child: new Text(value), value: value);
+                  }).toList();
+                },
+              ),
               hintText: "Number of Discs",
               hintStyle: TextStyle(
                 fontSize: 12,
@@ -106,8 +104,6 @@ class widget {
               focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(color: Colors.red)),
-              
-             
             ),
           ),
         ),
@@ -117,7 +113,8 @@ class widget {
 }
 
 class check {
-  Widget Checka(int? bluerayno, int? dvdno, totalprice, int? dvdprice, int? bluerayprice) {
+  Widget Checka(BuildContext context, int? bluerayno, int? dvdno, totalprice,
+      int? dvdprice, int? bluerayprice, String? title) {
     return new Center(
         child: new Container(
       margin: EdgeInsets.only(top: 5, bottom: 5),
@@ -141,38 +138,29 @@ class check {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Test disc 01',
+                  title.toString(),
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold),
                 ),
-                // SizedBox(
-                //   width: 95,
-                // ),
-                Row(
-                  children: [
-                    Text(
-                      '  Edit',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: 5.0,
-                    ),
-                    Text(
-                      'Remove',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => disc_create_screen()),
+                    );
+                  },
+                  child: Text(
+                    '  Edit',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -293,7 +281,8 @@ class check {
     ));
   }
 
-  Widget Checkb(BuildContext context ,String? add1, String? add2, int? zip, String? stat, String? cit) {
+  Widget Checkb(BuildContext context, String? add1, String? add2, int? zip,
+      String? stat, String? cit) {
     return new Center(
         child: new Container(
       padding: EdgeInsets.only(
@@ -330,10 +319,11 @@ class check {
                 InkWell(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) => Select_Shipping_address_Screen()),
-                      );
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) =>
+                              Select_Shipping_address_Screen()),
+                    );
                   },
                   child: Text(
                     'Edit',
@@ -351,18 +341,18 @@ class check {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                   '${ add1} ${add2}',
+                    '${add1} ${add2}',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 15),
                   ),
                   Text(
-                   zip.toString(),
+                    zip.toString(),
                     style: TextStyle(color: Colors.black, fontSize: 15),
                   ),
                   Text(
-                    '${ stat} ${cit}',
+                    '${stat} ${cit}',
                     style: TextStyle(color: Colors.black, fontSize: 15),
                   ),
                 ],

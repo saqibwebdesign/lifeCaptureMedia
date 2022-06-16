@@ -63,8 +63,8 @@ class api_calls with ChangeNotifier {
             builder: (BuildContext context) => gettoken == null
                 ? Login_Screen()
                 : Home_Screen(
-               //   sts: getuserid
-                  )),
+                    //   sts: getuserid
+                    )),
       );
       SharedPreferences aa = await SharedPreferences.getInstance();
       aa.setString('new', datas);
@@ -130,7 +130,7 @@ class api_calls with ChangeNotifier {
     return;
   }
 
-Future<profile> getuserdetails() async {
+  Future<profile> getuserdetails() async {
     final _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
     final gettoken = prefs.getString('new');
@@ -152,11 +152,11 @@ Future<profile> getuserdetails() async {
       print(details.user);
       return details;
     } else {
-       return data;
+      return data;
     }
   }
 
-  updateuserdetails(fname,lname,dateofbirth) async {
+  updateuserdetails(fname, lname, dateofbirth) async {
     final _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
     final gettoken = prefs.getString('new');
@@ -173,13 +173,13 @@ Future<profile> getuserdetails() async {
     var data = json.decode(response.body);
     if (response.statusCode == 200) {
       print(data);
-       return data;
+      return data;
     } else {
       return data;
     }
   }
 
-Future<shipping_address> getshippingadress() async {
+  Future<shipping_address> getshippingadress() async {
     final _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
     final gettoken = prefs.getString('new');
@@ -197,13 +197,14 @@ Future<shipping_address> getshippingadress() async {
     var data = json.decode(response.body);
 
     if (response.statusCode == 200) {
-      var details = shipping_address.fromJson(data); 
+      var details = shipping_address.fromJson(data);
       return details;
     } else {
-       return data;
+      return data;
     }
   }
-adduserAddress( BuildContext context,add1,add2,cty,stat,zipcde) async {
+
+  adduserAddress(BuildContext context, add1, add2, cty, stat, zipcde) async {
     final _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
     final gettoken = prefs.getString('new');
@@ -218,20 +219,20 @@ adduserAddress( BuildContext context,add1,add2,cty,stat,zipcde) async {
       headers: userHeader,
     );
     var data = json.decode(response.body);
-        print(data);
+    print(data);
     if (response.statusCode == 200) {
-        Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                      builder: (context) => cart_Screen()),
-                                );
+      Navigator.push(
+        context,
+        CupertinoPageRoute(builder: (context) => cart_Screen()),
+      );
       print(data);
-       return data;
+      return data;
     } else {
       return data;
     }
   }
-cartstep1( BuildContext context,dvd,bluray) async {
+
+  cartstep1(BuildContext context, dvd, bluray) async {
     final _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
     final gettoken = prefs.getString('new');
@@ -246,21 +247,20 @@ cartstep1( BuildContext context,dvd,bluray) async {
       headers: userHeader,
     );
     var data = json.decode(response.body);
-        print(data);
+    print(data);
     if (response.statusCode == 200) {
-       Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) => select_Video_Screen()),
-                      );
+      Navigator.push(
+        context,
+        CupertinoPageRoute(builder: (context) => select_Video_Screen()),
+      );
       print(data);
-       return data;
+      return data;
     } else {
       return data;
     }
   }
-   
-cartstep2( BuildContext context,title) async {
+
+  cartstep2(BuildContext context, title) async {
     final _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
     final gettoken = prefs.getString('new');
@@ -275,20 +275,20 @@ cartstep2( BuildContext context,title) async {
       headers: userHeader,
     );
     var data = json.decode(response.body);
-        print(data);
+    print(data);
     if (response.statusCode == 200) {
       Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                                builder: (context) => select_videos_screen()),
-                          );
+        context,
+        CupertinoPageRoute(builder: (context) => select_videos_screen()),
+      );
       print(data);
-       return data;
+      return data;
     } else {
       return data;
     }
   }
-cartstep4( BuildContext context,adressid) async {
+
+  cartstep4(BuildContext context, adressid) async {
     final _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
     final gettoken = prefs.getString('new');
@@ -303,23 +303,21 @@ cartstep4( BuildContext context,adressid) async {
       headers: userHeader,
     );
     var data = json.decode(response.body);
-        print(data);
+    print(data);
     if (response.statusCode == 200) {
       print(adressid);
       Navigator.push(
-                                                  context,
-                                                  CupertinoPageRoute(
-                                                      builder: (context) =>
-                                                          Checkout_Screen()),
-                                                );
+        context,
+        CupertinoPageRoute(builder: (context) => Checkout_Screen()),
+      );
       print(data);
-       return data;
+      return data;
     } else {
       return data;
     }
   }
 
-Future<allcart> checkout() async {
+  Future<allcart> checkout() async {
     final _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
     final gettoken = prefs.getString('new');
@@ -337,35 +335,12 @@ Future<allcart> checkout() async {
     var data = json.decode(response.body);
 
     if (response.statusCode == 200) {
-      var details = allcart.fromJson(data); 
+      var details = allcart.fromJson(data);
       return details;
     } else {
-       return data;
+      return data;
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   Future menuitems() async {
     final _prefs = SharedPreferences.getInstance();
@@ -416,8 +391,6 @@ Future<allcart> checkout() async {
 
     return datas;
   }
-
- 
 
   Future deatils_varient(id) async {
     final _prefs = SharedPreferences.getInstance();
@@ -539,9 +512,6 @@ Future<allcart> checkout() async {
 
     return datas;
   }
-
-  
-
 
   submit(
     order,

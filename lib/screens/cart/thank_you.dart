@@ -270,7 +270,7 @@ class Thankyou_screen extends StatelessWidget {
                 height: 2,
               ),
 
-           //   check().Checkb(),
+              //   check().Checkb(),
               SizedBox(
                 height: widget().sbheight,
               ),
@@ -300,7 +300,6 @@ class Thankyou_screen extends StatelessWidget {
                   ),
                 ),
               ),
-              
             ],
           ),
         ));

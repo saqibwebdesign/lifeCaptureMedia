@@ -234,9 +234,9 @@ class select_Video_Screen extends StatelessWidget {
                         ),
                         onPressed: () {
                           cart2.cartstep2(
-                  context,  _titl.text,
-                  );
-                          
+                            context,
+                            _titl.text,
+                          );
                         },
                       ),
                     ),

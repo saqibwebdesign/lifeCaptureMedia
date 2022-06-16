@@ -41,10 +41,8 @@ class onboradingscreen_1 extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.push(
-
                         context,
                         CupertinoPageRoute(
-
                             builder: (context) => createaccount(
                                   title: 'juiku8i',
                                 )),
@@ -69,7 +67,8 @@ class onboradingscreen_1 extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        CupertinoPageRoute(builder: (context) => Login_Screen()),
+                        CupertinoPageRoute(
+                            builder: (context) => Login_Screen()),
                       );
                     },
                   ),

@@ -9,7 +9,7 @@ import 'package:untitled/screens/Dashboard_screens/Home_Screen.dart';
 
 class mainprovider extends ChangeNotifier {
   bool selectedbutton = true;
- bool islogedin = false;
+  bool islogedin = false;
   void Update() {
     selectedbutton = !selectedbutton;
     notifyListeners();
@@ -96,17 +96,16 @@ class mainprovider extends ChangeNotifier {
       };
 
       final response = await http.post(
-          Uri.parse(
-            'https://dnpprojects.com/demo/lifeCaptureMedia/api/register',
-          ),
+        Uri.parse(
+          'https://dnpprojects.com/demo/lifeCaptureMedia/api/register',
+        ),
         body: data,
-          headers: <String, String>{
-            'Accept': 'application/json',
-          },
-          );
+        headers: <String, String>{
+          'Accept': 'application/json',
+        },
+      );
 
       var datas = (jsonDecode(response.body));
-
 
       print(datas['message']);
 
@@ -116,17 +115,16 @@ class mainprovider extends ChangeNotifier {
     }
     notifyListeners();
   }
-  Future sigin(
-      BuildContext context,
-      email,
-      password,
 
-      ) async {
+  Future sigin(
+    BuildContext context,
+    email,
+    password,
+  ) async {
     try {
       var data = {
         'email': email,
         'password': password,
-
       };
 
       final response = await http.post(
@@ -136,40 +134,33 @@ class mainprovider extends ChangeNotifier {
           body: data);
 
       var datas = (jsonDecode(response.body));
-       if(datas['message'].toString().contains( 'User logged-in!')){
-         islogedin = true;
-         print( 'true');
+      if (datas['message'].toString().contains('User logged-in!')) {
+        islogedin = true;
+        print('true');
 
-         print(datas['message']);
+        print(datas['message']);
 
-         Navigator.push(
-           context,
-           MaterialPageRoute(
-               builder: (context) => Home_Screen()),
-         );
-
-
-       }
-       else{
-         islogedin = false;
-         print(datas['message']);
-         print( 'false');
-         return AlertDialog(
-           title: Text("Error"),
-           content: Text(e.toString()),
-           actions: [
-             FlatButton(
-               child: Text("Ok"),
-               onPressed: () {
-                 Navigator.of(context).pop();
-               },
-             )
-           ],
-         );
-       }
-
-
-
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Home_Screen()),
+        );
+      } else {
+        islogedin = false;
+        print(datas['message']);
+        print('false');
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text(e.toString()),
+          actions: [
+            FlatButton(
+              child: Text("Ok"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      }
     } catch (e) {
       print(e.toString());
     }

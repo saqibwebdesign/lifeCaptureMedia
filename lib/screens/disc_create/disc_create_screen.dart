@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,11 +15,10 @@ class disc_create_screen extends StatefulWidget {
 }
 
 class _disc_create_screenState extends State<disc_create_screen> {
-  
   @override
   Widget build(BuildContext context) {
-     TextEditingController _dvd = TextEditingController();
-  TextEditingController _ray = TextEditingController();
+    TextEditingController _dvd = TextEditingController();
+    TextEditingController _ray = TextEditingController();
     final cart1 = Provider.of<api_calls>(context);
     bool _value = false;
     String _selected = "";
@@ -114,7 +112,7 @@ class _disc_create_screenState extends State<disc_create_screen> {
                         SizedBox(
                           height: 10,
                         ),
-                        widget().dropdownbutton(itm,_dvd),
+                        widget().dropdownbutton(itm, _dvd),
                       ],
                     ),
                     Column(
@@ -124,7 +122,7 @@ class _disc_create_screenState extends State<disc_create_screen> {
                         SizedBox(
                           height: 10,
                         ),
-                        widget().dropdownbutton(itm,_ray),
+                        widget().dropdownbutton(itm, _ray),
                       ],
                     ),
                   ],
@@ -147,10 +145,11 @@ class _disc_create_screenState extends State<disc_create_screen> {
                           fontSize: widget().fontsize),
                     ),
                     onPressed: () {
-                        cart1.cartstep1(
-                  context,  _dvd.text,_ray.text,
-                  );
-                    
+                      cart1.cartstep1(
+                        context,
+                        _dvd.text,
+                        _ray.text,
+                      );
                     },
                   ),
                 ),

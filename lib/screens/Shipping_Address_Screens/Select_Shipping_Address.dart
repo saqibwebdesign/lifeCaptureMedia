@@ -63,134 +63,128 @@ class Select_Shipping_address_Screen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top:10.0),
+          padding: const EdgeInsets.only(top: 10.0),
           child: Column(
             children: [
               FutureBuilder<shipping_address>(
-                          future: address.getshippingadress(),
-                          builder: (c,  snapshot) {
-                            if (snapshot.connectionState == ConnectionState.waiting) {
-                              return Center(
-                                child: CircularProgressIndicator()
-                              );
-                            }
-                            if (!snapshot.hasData)
-                              return Align(
-                                  alignment: Alignment.center,
-                                  child: Column(
-                                    children: [
-                                     Text(
-                                        "Nothing to show here",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
+                future: address.getshippingadress(),
+                builder: (c, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (!snapshot.hasData)
+                    return Align(
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Nothing to show here",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ));
 
-                                    ],
-                                  ));
+                  if (snapshot.hasData) {
+                    return Center(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: snapshot.data!.address?.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(bottom: 15, left: 13),
+                              child: InkWell(
+                                onTap: () {
+                                  address.cartstep4(
+                                    context,
+                                    snapshot.data!.address![index].id,
+                                  );
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                            '${snapshot.data!.address![index].address1} ${snapshot.data!.address![index].address2}'),
 
-                            if (snapshot.hasData) {
-                              return Center(
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: snapshot.data!.address?.length,
-                                    itemBuilder: (BuildContext context, int index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.only(bottom: 15,left: 13),
-                                        child: InkWell(
-                                          onTap: (){
-                                            address.cartstep4(
-                  context,  snapshot.data!.address![index].id,
-                  );
-                                            
-                                         
-                                          },
-                                          child: Column(
-                                             crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                              
-                                        children: [
-                                          Text('${snapshot.data!.address![index].address1} ${snapshot.data!.address![index].address2}'),
-                                           
-                                          // Text('${snapshot.data!.address![index].address2}'),
-                                        ],
-                                              ),
-                                              SizedBox(height: 3,),
-                                              Text('${snapshot.data!.address![index].zipcode}'),
-                                               SizedBox(height: 3,),
-                                           Row(
-                                              
-                                        children: [
-                                          Text('${snapshot.data!.address![index].city} ${snapshot.data!.address![index].state}'),
-                                           
-                                          // Text('${snapshot.data!.address![index].address2}'),
-                                        ],
-                                              ),                                         
-                                            SizedBox(
-                                            height: 5,
-                                          ),
-                                          Divider(
-                                            thickness: 1.5,
-                                          ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                              );
-                            }
-                            if (snapshot.hasError) print(snapshot.error.toString());
-                            return Align(
-                              alignment: Alignment.center,
-                              child: CircularProgressIndicator()
+                                        // Text('${snapshot.data!.address![index].address2}'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                        '${snapshot.data!.address![index].zipcode}'),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                            '${snapshot.data!.address![index].city} ${snapshot.data!.address![index].state}'),
+
+                                        // Text('${snapshot.data!.address![index].address2}'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Divider(
+                                      thickness: 1.5,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             );
-                          },
-                        ),
-                        
-                                        SizedBox(
-                                          height: widget().sbheight,
-                                        ),
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Container(
-                                            height: widget().height,
-                                            width: widget().width,
-                                            child: MaterialButton(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10)),
-                                              color: Color.fromRGBO(22, 97, 207, 10),
-                                              child: Text(
-                                                'Add New Address',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  fontFamily: 'Roboto',
-                                                  color: Colors.white,
-                                                  fontSize: widget().fontsize,
-                                                ),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  CupertinoPageRoute(
-                                                      builder: (context) =>
-                                                          select_new_Address_screen()),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ),
+                          }),
+                    );
+                  }
+                  if (snapshot.hasError) print(snapshot.error.toString());
+                  return Align(
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator());
+                },
+              ),
+              SizedBox(
+                height: widget().sbheight,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  height: widget().height,
+                  width: widget().width,
+                  child: MaterialButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    color: Color.fromRGBO(22, 97, 207, 10),
+                    child: Text(
+                      'Add New Address',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        color: Colors.white,
+                        fontSize: widget().fontsize,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => select_new_Address_screen()),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),
-        
-        
-        
-        
       ),
     );
   }

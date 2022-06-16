@@ -19,7 +19,6 @@ import 'package:untitled/screens/login/user-Affrement.dart';
 
 import 'screens/login/loginscreen.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences aa = await SharedPreferences.getInstance();
@@ -32,23 +31,23 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => api_calls()),
-         ChangeNotifierProvider(create: (_) => mainprovider()),
+        ChangeNotifierProvider(create: (_) => mainprovider()),
       ],
-      child:MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Life Capture Media',
-      theme: ThemeData(
-        iconTheme: IconThemeData(color: Colors.black),
-        fontFamily: 'Roboto',
-        backgroundColor: Colors.white,
-
-        primarySwatch: Colors.blue,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Life Capture Media',
+        theme: ThemeData(
+          iconTheme: IconThemeData(color: Colors.black),
+          fontFamily: 'Roboto',
+          backgroundColor: Colors.white,
+          primarySwatch: Colors.blue,
+        ),
+        home: gettoken == null ? MyHome() : Home_Screen(),
       ),
-      home:  gettoken == null ? MyHome() : Home_Screen(),
-    ),     
-     ),
+    ),
   );
 }
+
 class MyHome extends StatefulWidget {
   @override
   _MyHomeState createState() => _MyHomeState();
@@ -145,5 +144,3 @@ class _MyHomeState extends State<MyHome> {
     );
   }
 }
-
-

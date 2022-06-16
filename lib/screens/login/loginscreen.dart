@@ -194,37 +194,29 @@ class _Login_ScreenState extends State<Login_Screen> {
                           curve: Curves.fastOutSlowIn,
                           height: 50,
                           width: 300,
-                         child: MaterialButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        color: Color.fromRGBO(22, 97, 207, 10),
-                        child: Text(
-                          'Done',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            color: Colors.white,
-                            fontSize: widget().fontsize,
-                          ),
-                        ),
+                          child: MaterialButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              color: Color.fromRGBO(22, 97, 207, 10),
+                              child: Text(
+                                'Done',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.white,
+                                  fontSize: widget().fontsize,
+                                ),
+                              ),
                               onPressed: () {
-                                print( username.text);
+                                print(username.text);
                                 print(password.text);
                                 setState(() {
                                   provider.isvalue = true;
                                 });
                                 provider.login(
                                     username.text, password.text, context);
-                              }
-                              )),
+                              })),
                     );
-
-
-
                   }),
-
-
-
-
 
                   // Consumer<api_calls>(builder: (context, provider, child) {
                   //   return Container(

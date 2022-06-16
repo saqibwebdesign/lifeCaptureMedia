@@ -12,12 +12,12 @@ class select_new_Address_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     TextEditingController address1 = TextEditingController();
-  TextEditingController address2 = TextEditingController();
-  TextEditingController city = TextEditingController();
-  TextEditingController states = TextEditingController();
-  TextEditingController zipcode = TextEditingController();
-  final enteraddress = Provider.of<api_calls>(context);
+    TextEditingController address1 = TextEditingController();
+    TextEditingController address2 = TextEditingController();
+    TextEditingController city = TextEditingController();
+    TextEditingController states = TextEditingController();
+    TextEditingController zipcode = TextEditingController();
+    final enteraddress = Provider.of<api_calls>(context);
     final List<String> valuestate = [
       'Kigali',
     ];
@@ -53,7 +53,6 @@ class select_new_Address_screen extends StatelessWidget {
           )
         ],
         iconTheme: IconThemeData(color: Colors.black),
-     
         backgroundColor: Colors.white,
         elevation: 0.0,
       ),
@@ -158,8 +157,7 @@ class select_new_Address_screen extends StatelessWidget {
                               ),
                             ),
                           ),
-                         
-                         SizedBox(
+                          SizedBox(
                             height: 5,
                           ),
                           Container(
@@ -169,7 +167,6 @@ class select_new_Address_screen extends StatelessWidget {
                               child: TextFormField(
                                 controller: city,
                                 decoration: InputDecoration(
-                                  
                                     hintStyle: TextStyle(
                                       fontFamily: 'Roboto',
                                     ),
@@ -196,7 +193,7 @@ class select_new_Address_screen extends StatelessWidget {
                               ),
                             ),
                           ),
-                           SizedBox(
+                          SizedBox(
                             height: 5,
                           ),
                           Container(
@@ -207,19 +204,21 @@ class select_new_Address_screen extends StatelessWidget {
                                 readOnly: true,
                                 controller: states,
                                 decoration: InputDecoration(
-                                   suffixIcon: PopupMenuButton<String>(
-      icon: const Icon(Icons.arrow_drop_down),
-      onSelected: (String value) {
-        states.text = value;
-      },
-      itemBuilder: (BuildContext context) {
-        return valuestate
-            .map<PopupMenuItem<String>>((String value) {
-          return new PopupMenuItem(
-              child: new Text(value), value: value);
-        }).toList();
-      },
-    ),
+                                    suffixIcon: PopupMenuButton<String>(
+                                      icon: const Icon(Icons.arrow_drop_down),
+                                      onSelected: (String value) {
+                                        states.text = value;
+                                      },
+                                      itemBuilder: (BuildContext context) {
+                                        return valuestate
+                                            .map<PopupMenuItem<String>>(
+                                                (String value) {
+                                          return new PopupMenuItem(
+                                              child: new Text(value),
+                                              value: value);
+                                        }).toList();
+                                      },
+                                    ),
                                     hintStyle: TextStyle(
                                       fontFamily: 'Roboto',
                                     ),
@@ -302,12 +301,13 @@ class select_new_Address_screen extends StatelessWidget {
                                     fontSize: widget().fontsize),
                               ),
                               onPressed: () {
-                            
-                           
-                                 enteraddress.adduserAddress(
-                  context,  address1.text,address2.text,city.text,states.text,zipcode.text
-                  );
-                               
+                                enteraddress.adduserAddress(
+                                    context,
+                                    address1.text,
+                                    address2.text,
+                                    city.text,
+                                    states.text,
+                                    zipcode.text);
                               },
                             ),
                           ),

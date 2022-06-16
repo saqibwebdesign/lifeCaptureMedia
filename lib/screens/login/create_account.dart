@@ -644,9 +644,12 @@ class _createaccountState extends State<createaccount> {
       ),
     );
   }
+
   createaccount() async {
-    final multipartRequest = new http.MultipartRequest("POST",
-        Uri.parse("https://dnpprojects.com/demo/lifeCaptureMedia/api/register"));
+    final multipartRequest = new http.MultipartRequest(
+        "POST",
+        Uri.parse(
+            "https://dnpprojects.com/demo/lifeCaptureMedia/api/register"));
 
     multipartRequest.fields.addAll({
       "firstname": firstname.text,
@@ -661,9 +664,7 @@ class _createaccountState extends State<createaccount> {
 
     var responseString = await response.stream.bytesToString();
 
-   
     if (response.statusCode == 200) {
-
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -671,11 +672,7 @@ class _createaccountState extends State<createaccount> {
             title: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.check,
-                  size: 60,
-                  color: Colors.green
-                ),
+                Icon(Icons.check, size: 60, color: Colors.green),
                 SizedBox(
                   height: 10,
                 ),
@@ -693,8 +690,7 @@ class _createaccountState extends State<createaccount> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            Login_Screen()),
+                        builder: (BuildContext context) => Login_Screen()),
                   );
                 },
               ),
@@ -702,12 +698,9 @@ class _createaccountState extends State<createaccount> {
           );
         },
       );
-    } else {
-     
-    }
+    } else {}
 
     print("response: " + responseString);
     print("response Status: ${response.statusCode}");
   }
-
 }

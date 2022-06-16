@@ -32,7 +32,7 @@ class Cart {
   int? totalPrice;
   String? createdAt;
   String? updatedAt;
- // List<Null>? videos;
+  // List<Null>? videos;
   Shipping? shipping;
 
   Cart(
@@ -45,7 +45,7 @@ class Cart {
       this.totalPrice,
       this.createdAt,
       this.updatedAt,
-    //  this.videos,
+      //  this.videos,
       this.shipping});
 
   Cart.fromJson(Map<String, dynamic> json) {

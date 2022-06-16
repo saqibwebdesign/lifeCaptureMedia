@@ -12,7 +12,6 @@ class setting_screen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-
         backgroundColor: Colors.white,
         elevation: 0.0,
         title: Text(
@@ -48,10 +47,11 @@ class setting_screen extends StatelessWidget {
                   height: 20,
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => User_Aggrement_Screen()),
+                      MaterialPageRoute(
+                          builder: (context) => User_Aggrement_Screen()),
                     );
                   },
                   child: Text(
@@ -63,7 +63,7 @@ class setting_screen extends StatelessWidget {
                   height: 20,
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Privacy_policy()),
@@ -78,7 +78,7 @@ class setting_screen extends StatelessWidget {
                   height: 20,
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => About_screen()),

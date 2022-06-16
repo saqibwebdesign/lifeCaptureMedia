@@ -1,8 +1,4 @@
-
-
 import 'package:flutter/material.dart';
-
-
 
 class About_screen extends StatelessWidget {
   const About_screen({Key? key}) : super(key: key);
@@ -12,7 +8,6 @@ class About_screen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-
         backgroundColor: Colors.white,
         elevation: 0.0,
         title: Text(
@@ -30,15 +25,17 @@ class About_screen extends StatelessWidget {
           Center(
             child: Container(
               height: 200,
-
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset( 'images/aboutlogo.png',height: 120,),
-                  Text( 'LifeCapture Media Mobile App'),
-                  Text( 'Version 2.1'),
-                  Text( 'Copyright© 2021 - All Rights Reserved'),
+                  Image.asset(
+                    'images/aboutlogo.png',
+                    height: 120,
+                  ),
+                  Text('LifeCapture Media Mobile App'),
+                  Text('Version 2.1'),
+                  Text('Copyright© 2021 - All Rights Reserved'),
                 ],
               ),
             ),
@@ -46,7 +43,6 @@ class About_screen extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-
         ],
       ),
     );
