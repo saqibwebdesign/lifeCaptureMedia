@@ -1,11 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/api_calls/apicalls.dart';
@@ -13,10 +10,6 @@ import 'package:untitled/provider/provider.dart';
 import 'package:untitled/provider/widgets.dart';
 import 'package:untitled/screens/Dashboard_screens/Home_Screen.dart';
 import 'package:untitled/screens/login/create_account.dart';
-import 'package:untitled/screens/login/privacy_policy.dart';
-import 'package:untitled/screens/login/shippingadree.dart';
-import 'package:untitled/screens/login/user-Affrement.dart';
-
 import 'screens/login/loginscreen.dart';
 
 Future<void> main() async {
