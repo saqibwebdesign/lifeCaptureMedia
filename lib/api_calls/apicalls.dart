@@ -9,6 +9,7 @@ import 'package:untitled/main.dart';
 import 'package:untitled/models/cart_model.dart';
 import 'package:untitled/models/profile_model.dart';
 import 'package:untitled/models/shipping_address.dart';
+import 'package:untitled/provider/widgets.dart';
 import 'package:untitled/screens/Dashboard_screens/Home_Screen.dart';
 import 'package:untitled/screens/cart/Checkout_screen.dart';
 import 'package:untitled/screens/cart/cart_Screen.dart';
@@ -285,6 +286,36 @@ class api_calls with ChangeNotifier {
       return data;
     } else {
       return data;
+    }
+  }
+
+  cartstep3(BuildContext context, pth) async {
+    final _prefs = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+    final gettoken = prefs.getString('new');
+    var userHeader = {
+      "Accept": "application/json",
+      'Authorization': 'Bearer $gettoken',
+    };
+    final multipartRequest =
+        new http.MultipartRequest("POST", Uri.parse('${url}cart/step3'));
+    //  multipartRequest.headers.addAll(userHeader);
+    multipartRequest.files.add(
+      await http.MultipartFile.fromPath(
+        'video_files[]',
+        pth,
+      ),
+    );
+    http.StreamedResponse response = await multipartRequest.send();
+
+    var responseString = await response.stream.bytesToString();
+    print("response: " + responseString);
+    print("response Status: ${response.statusCode}");
+    if (response.statusCode == 200) {
+      Navigator.push(
+        context,
+        CupertinoPageRoute(builder: (context) => select_videos_screen()),
+      );
     }
   }
 
