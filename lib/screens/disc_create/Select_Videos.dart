@@ -21,7 +21,7 @@ class _select_videos_screenState extends State<select_videos_screen> {
   final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   String? _fileName;
   String? _saveAsFileName;
-  List<PlatformFile>? _paths;
+  List? _paths;
   String? _directoryPath;
   String? _extension;
   bool _isLoading = false;
@@ -63,32 +63,6 @@ class _select_videos_screenState extends State<select_videos_screen> {
     });
   }
 
-// double getFileSize(File _paths){
-//     int sizeInBytes = _paths!.map((e) => e.name).toString()
-//     double sizeInMb = sizeInBytes / (1024 * 1024);
-//     return sizeInMb;
-// }
-  // void _clearCachedFiles() async {
-  //   _resetState();
-  //   try {
-  //     bool? result = await FilePicker.platform.clearTemporaryFiles();
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         backgroundColor: result! ? Colors.green : Colors.red,
-  //         content: Text((result
-  //             ? 'Temporary files removed with success.'
-  //             : 'Failed to clean temporary files')),
-  //       ),
-  //     );
-  //   } on PlatformException catch (e) {
-  //     _logException('Unsupported operation' + e.toString());
-  //   } catch (e) {
-  //     _logException(e.toString());
-  //   } finally {
-  //     setState(() => _isLoading = false);
-  //   }
-  // }
-
   void _logException(String message) {
     print(message);
     _scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
@@ -127,10 +101,6 @@ class _select_videos_screenState extends State<select_videos_screen> {
           leading: widget().appbar(),
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
-          // leading: IconButton(
-          //   icon: Icon(Icons.arrow_back, color: Colors.black),
-          //   onPressed: () => Navigator.of(context).pop(),
-          // ),
           backgroundColor: Colors.white,
           elevation: 0.0,
           title: Padding(
@@ -174,139 +144,152 @@ class _select_videos_screenState extends State<select_videos_screen> {
                 children: <Widget>[
                   Builder(
                     builder: (BuildContext context) => _paths != null
-                        ? Container(
-                            height: 520,
-                            child: ListView.builder(
-                                itemCount: _paths != null && _paths!.isNotEmpty
-                                    ? _paths!.length
-                                    : 1,
-                                itemBuilder: (context, index) {
-                                  final bool isMultiPath =
-                                      _paths != null && _paths!.isNotEmpty;
-                                  final String name =
-                                      // '$index: ' +
-                                      (isMultiPath
-                                          ? _paths!
-                                              .map((e) => e.name)
-                                              .toList()[index]
-                                          : _fileName ?? '...');
-                                  final filesize = _paths!
-                                      .map((e) => e.size)
-                                      .toList()[index];
-                                  final kb = filesize / 1024;
-                                  final mb = kb / 1024;
-                                  final size = (mb >= 1)
-                                      ? '${mb.toStringAsFixed(2)} MB'
-                                      : '${kb.toStringAsFixed(2)} KB';
-                                  return GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        _flag = !_flag;
-                                      });
-                                    },
-                                    child: Container(
-                                        height: 120,
-                                        width: 400,
-                                        margin: const EdgeInsets.only(
-                                            left: 15.0, top: 30.0, right: 15.0),
-                                        padding: const EdgeInsets.all(3.0),
-                                        decoration: BoxDecoration(
-                                            color: _flag
-                                                ? Colors.white
-                                                : Color.fromRGBO(
-                                                    227, 242, 253, 10),
-                                            border: Border.all(
-                                              color: _flag
-                                                  ? Colors.grey
-                                                  : Color.fromRGBO(
-                                                      227, 242, 253, 10),
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              height: 80,
-                                              width: 90,
-                                              color: Color.fromARGB(
-                                                  255, 228, 226, 226),
-                                              child: Center(
-                                                child: Icon(
-                                                    Icons
-                                                        .video_collection_sharp,
-                                                    size: 50,
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                            Column(
+                        ? Column(
+                            children: [
+                              Container(
+                                height: 520,
+                                child: ListView.builder(
+                                    itemCount:
+                                        _paths != null && _paths!.isNotEmpty
+                                            ? _paths!.length
+                                            : 1,
+                                    itemBuilder: (context, index) {
+                                      final bool isMultiPath =
+                                          _paths != null && _paths!.isNotEmpty;
+                                      final String name =
+                                          // '$index: ' +
+                                          (isMultiPath
+                                              ? _paths!
+                                                  .map((e) => e.name)
+                                                  .toList()[index]
+                                              : _fileName ?? '...');
+                                      final filesize = _paths!
+                                          .map((e) => e.size)
+                                          .toList()[index];
+                                      final kb = filesize / 1024;
+                                      final mb = kb / 1024;
+                                      final size = (mb >= 1)
+                                          ? '${mb.toStringAsFixed(2)} MB'
+                                          : '${kb.toStringAsFixed(2)} KB';
+
+                                      return GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _flag = !_flag;
+                                          });
+                                        },
+                                        child: Container(
+                                            height: 120,
+                                            width: 400,
+                                            margin: const EdgeInsets.only(
+                                                left: 15.0,
+                                                top: 30.0,
+                                                right: 15.0),
+                                            padding: const EdgeInsets.all(3.0),
+                                            decoration: BoxDecoration(
+                                                color: _flag
+                                                    ? Colors.white
+                                                    : Color.fromRGBO(
+                                                        227, 242, 253, 10),
+                                                border: Border.all(
+                                                  color: _flag
+                                                      ? Colors.grey
+                                                      : Color.fromRGBO(
+                                                          227, 242, 253, 10),
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: Row(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
+                                                  CrossAxisAlignment.center,
                                               children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(7.0),
-                                                  child: SizedBox(
-                                                    child: Text(
-                                                      name,
+                                                Container(
+                                                  height: 80,
+                                                  width: 90,
+                                                  color: Color.fromARGB(
+                                                      255, 228, 226, 226),
+                                                  child: Center(
+                                                    child: Icon(
+                                                        Icons
+                                                            .video_collection_sharp,
+                                                        size: 50,
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              7.0),
+                                                      child: SizedBox(
+                                                        child: Text(
+                                                          name,
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 15,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.centerRight,
+                                                      child: ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                primary: _flag
+                                                                    ? Colors
+                                                                        .grey
+                                                                    : Color
+                                                                        .fromRGBO(
+                                                                            0,
+                                                                            120,
+                                                                            213,
+                                                                            10),
+                                                                shape:
+                                                                    CircleBorder(),
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            10)),
+                                                        child: Icon(
+                                                          Icons.add,
+                                                          size: 15,
+                                                        ),
+                                                        onPressed: () {
+                                                          setState(() =>
+                                                              _flag = !_flag);
+                                                        },
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      '$size',
                                                       style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: Colors.grey,
                                                         fontSize: 15,
                                                       ),
                                                     ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.centerRight,
-                                                  child: ElevatedButton(
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                            primary: _flag
-                                                                ? Colors.grey
-                                                                : Color
-                                                                    .fromRGBO(
-                                                                        0,
-                                                                        120,
-                                                                        213,
-                                                                        10),
-                                                            shape:
-                                                                CircleBorder(),
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10)),
-                                                    child: Icon(
-                                                      Icons.add,
-                                                      size: 15,
-                                                    ),
-                                                    onPressed: () {
-                                                      setState(
-                                                          () => _flag = !_flag);
-                                                    },
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  '$size',
-                                                  style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 15,
-                                                  ),
+                                                  ],
                                                 ),
                                               ],
-                                            ),
-                                          ],
-                                        )),
-                                  );
-                                }),
+                                            )),
+                                      );
+                                    }),
+                              ),
+                              Text(
+                                  "Total:${((_paths!.map((e) => e.size).toList().reduce((a, b) => a + b)) / 1024 / 1024).toStringAsFixed(2)} MB "),
+                            ],
                           )
 
                         //  Container(
@@ -371,6 +354,9 @@ class _select_videos_screenState extends State<select_videos_screen> {
                                 textAlign: TextAlign.center,
                               ),
                               onPressed: () {
+                                setState(() {
+                                  _paths = null;
+                                });
                                 _pickFiles();
                                 // Navigator.push(
                                 //   context,
@@ -408,20 +394,29 @@ class _select_videos_screenState extends State<select_videos_screen> {
                                 textAlign: TextAlign.center,
                               ),
                               onPressed: () {
-                                File file = File(_paths!
-                                    .map((e) => e.path)
-                                    // .toList()
-                                    .toString()
-                                    .toString());
-                                print(file);
-                                var length = _paths?.length.toString();
-                                print(length);
-                                var only_path = _paths!
-                                    .map((e) => e.path)
-                                    // .toList()
-                                    .toString();
-                                print(only_path);
-                                cart3.cartstep3(context, file);
+                                // File file = File(_paths!
+                                //     .map((e) => e.path)
+                                //     // .toList()
+                                //     .toString()
+                                //     .toString());
+                                // print(file);
+                                // List? a = file.toString().split(',');
+                                // print(a);
+                                // // var length = _paths?.length.toString();
+                                // // print(length);
+                                // var only_path = _paths!
+                                //     .map((e) => e.path)
+                                //     // .toList()
+                                //     .toString();
+                                // List? b = only_path.toString().split(',');
+                                // print(b);
+                                // var name = _paths!
+                                //     .map((e) => e.name)
+                                //     // .toList()
+                                //     .toString();
+                                // print("jjjjjjjjjjjjjjjjjjjj" + only_path);
+                                //  print(_paths);
+                                cart3.cartstep3(context, _paths);
                               },
                             ),
                           ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:untitled/models/profile_model.dart';
 import 'package:untitled/models/shipping_address.dart';
 import 'package:untitled/provider/widgets.dart';
 import 'package:untitled/screens/Dashboard_screens/Home_Screen.dart';
+import 'package:untitled/screens/Shipping_Address_Screens/Select_Shipping_Address.dart';
 import 'package:untitled/screens/cart/Checkout_screen.dart';
 import 'package:untitled/screens/cart/cart_Screen.dart';
 import 'package:untitled/screens/disc_create/Select_Videos.dart';
@@ -299,13 +301,16 @@ class api_calls with ChangeNotifier {
     };
     final multipartRequest =
         new http.MultipartRequest("POST", Uri.parse('${url}cart/step3'));
-    //  multipartRequest.headers.addAll(userHeader);
-    multipartRequest.files.add(
-      await http.MultipartFile.fromPath(
-        'video_files[]',
-        pth,
-      ),
-    );
+    multipartRequest.headers.addAll(userHeader);
+    for (var item in pth) {
+      multipartRequest.files.add(
+        await http.MultipartFile.fromPath(
+          'video_files[]',
+          item.path,
+        ),
+      );
+    }
+
     http.StreamedResponse response = await multipartRequest.send();
 
     var responseString = await response.stream.bytesToString();
@@ -314,7 +319,8 @@ class api_calls with ChangeNotifier {
     if (response.statusCode == 200) {
       Navigator.push(
         context,
-        CupertinoPageRoute(builder: (context) => select_videos_screen()),
+        CupertinoPageRoute(
+            builder: (context) => Select_Shipping_address_Screen()),
       );
     }
   }
