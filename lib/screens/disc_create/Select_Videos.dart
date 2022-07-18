@@ -287,8 +287,20 @@ class _select_videos_screenState extends State<select_videos_screen> {
                                       );
                                     }),
                               ),
-                              Text(
-                                  "Total:${((_paths!.map((e) => e.size).toList().reduce((a, b) => a + b)) / 1024 / 1024).toStringAsFixed(2)} MB "),
+                              Container(
+                                  child: (double.parse(((_paths!
+                                                      .map((e) => e.size)
+                                                      .toList()
+                                                      .reduce(
+                                                          (a, b) => a + b)) /
+                                                  1024 /
+                                                  1024)
+                                              .toStringAsFixed(2)) <=
+                                          4)
+                                      ? Text(
+                                          "Total Size: ${((_paths!.map((e) => e.size).toList().reduce((a, b) => a + b)) / 1024 / 1024).toStringAsFixed(2)} MB / 900 MB")
+                                      : Text(
+                                          "Total Size: ${((_paths!.map((e) => e.size).toList().reduce((a, b) => a + b)) / 1024 / 1024).toStringAsFixed(2)} MB / 900 MB")),
                             ],
                           )
 
@@ -333,96 +345,84 @@ class _select_videos_screenState extends State<select_videos_screen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-                    child: Column(
-                      children: <Widget>[
-                        Center(
-                          child: Container(
-                            height: widget().height,
-                            width: widget().width,
-                            child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              color: Color.fromRGBO(22, 97, 207, 10),
-                              child: Text(
-                                _multiPick ? 'Pick files' : 'Pick file',
-                                //  'Add Selected Videos',
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  color: Colors.white,
-                                  fontSize: widget().fontsize,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _paths = null;
-                                });
-                                _pickFiles();
-                                // Navigator.push(
-                                //   context,
-                                //   CupertinoPageRoute(
-                                //       builder: (context) =>
-                                //           Select_Shipping_address_Screen()),
-                                // );
-                              },
+                    child: Center(
+                      child: Container(
+                        height: widget().height,
+                        width: widget().width,
+                        child: MaterialButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          color: Color.fromRGBO(22, 97, 207, 10),
+                          child: Text(
+                            _multiPick ? 'Pick files' : 'Pick file',
+                            //  'Add Selected Videos',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              color: Colors.white,
+                              fontSize: widget().fontsize,
                             ),
+                            textAlign: TextAlign.center,
                           ),
+                          onPressed: () {
+                            setState(() {
+                              _paths = null;
+                            });
+                            _pickFiles();
+                            // Navigator.push(
+                            //   context,
+                            //   CupertinoPageRoute(
+                            //       builder: (context) =>
+                            //           Select_Shipping_address_Screen()),
+                            // );
+                          },
                         ),
-                      ],
+                      ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 0, bottom: 0),
-                    child: Column(
-                      children: <Widget>[
-                        Center(
-                          child: Container(
-                            height: widget().height,
-                            width: widget().width,
-                            child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              color: Color.fromRGBO(22, 97, 207, 10),
-                              child: Text(
-                                "Next",
-                                //  'Add Selected Videos',
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  color: Colors.white,
-                                  fontSize: widget().fontsize,
+                    padding: const EdgeInsets.only(top: 0, bottom: 15),
+                    child: Container(
+                        child: (double.parse(((_paths!
+                                            .map((e) => e.size)
+                                            .toList()
+                                            .reduce((a, b) => a + b)) /
+                                        1024 /
+                                        1024)
+                                    .toStringAsFixed(2)) <=
+                                4)
+                            ? Container(
+                                height: widget().height,
+                                width: widget().width,
+                                child: MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  color: Color.fromRGBO(22, 97, 207, 10),
+                                  child: Text(
+                                    "Next",
+                                    //  'Add Selected Videos',
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      color: Colors.white,
+                                      fontSize: widget().fontsize,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  onPressed: () {},
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              onPressed: () {
-                                // File file = File(_paths!
-                                //     .map((e) => e.path)
-                                //     // .toList()
-                                //     .toString()
-                                //     .toString());
-                                // print(file);
-                                // List? a = file.toString().split(',');
-                                // print(a);
-                                // // var length = _paths?.length.toString();
-                                // // print(length);
-                                // var only_path = _paths!
-                                //     .map((e) => e.path)
-                                //     // .toList()
-                                //     .toString();
-                                // List? b = only_path.toString().split(',');
-                                // print(b);
-                                // var name = _paths!
-                                //     .map((e) => e.name)
-                                //     // .toList()
-                                //     .toString();
-                                // print("jjjjjjjjjjjjjjjjjjjj" + only_path);
-                                //  print(_paths);
-                                cart3.cartstep3(context, _paths);
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                              )
+                            : Container(
+                                height: 50,
+                                width: 350,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.red,
+                                ),
+                                child: Center(
+                                    child: Text(
+                                  "Warning! Total files size must be lower then 900 Mbs",
+                                  style: TextStyle(color: Colors.white),
+                                )),
+                              )),
                   ),
                 ],
               ),
