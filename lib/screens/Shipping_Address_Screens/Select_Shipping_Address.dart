@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled/api_calls/apicalls.dart';
 import 'package:untitled/models/shipping_address.dart';
-import 'package:untitled/provider/provider.dart';
 import 'package:untitled/provider/widgets.dart';
 import 'package:untitled/screens/Dashboard_screens/Drawer.dart';
 import 'package:untitled/screens/Shipping_Address_Screens/Select_new_Address.dart';
-import 'package:untitled/screens/cart/Checkout_screen.dart';
 import 'package:untitled/screens/cart/cart_Screen.dart';
 
 class Select_Shipping_address_Screen extends StatelessWidget {
