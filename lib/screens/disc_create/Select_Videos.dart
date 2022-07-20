@@ -301,50 +301,65 @@ class _select_videos_screenState extends State<select_videos_screen> {
                                           "Total Size: ${((_paths!.map((e) => e.size).toList().reduce((a, b) => a + b)) / 1024 / 1024).toStringAsFixed(2)} MB / 900 MB")
                                       : Text(
                                           "Total Size: ${((_paths!.map((e) => e.size).toList().reduce((a, b) => a + b)) / 1024 / 1024).toStringAsFixed(2)} MB / 900 MB")),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 10,
+                                ),
+                                child: Container(
+                                    child: (double.parse(((_paths!
+                                                        .map((e) => e.size)
+                                                        .toList()
+                                                        .reduce(
+                                                            (a, b) => a + b)) /
+                                                    1024 /
+                                                    1024)
+                                                .toStringAsFixed(2)) <=
+                                            4)
+                                        ? Container(
+                                            height: widget().height,
+                                            width: widget().width,
+                                            child: MaterialButton(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              color: Color.fromRGBO(
+                                                  22, 97, 207, 10),
+                                              child: Text(
+                                                "Next",
+                                                //  'Add Selected Videos',
+                                                style: TextStyle(
+                                                  fontFamily: 'Roboto',
+                                                  color: Colors.white,
+                                                  fontSize: widget().fontsize,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              onPressed: () {},
+                                            ),
+                                          )
+                                        : Container(
+                                            height: 50,
+                                            width: 350,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.red,
+                                            ),
+                                            child: Center(
+                                                child: Text(
+                                              "Warning! Total files size must be lower then 900 Mbs",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                          )),
+                              ),
                             ],
                           )
-
-                        //  Container(
-                        //     padding: const EdgeInsets.only(bottom: 30.0),
-                        //     height: MediaQuery.of(context).size.height * 0.50,
-                        //     child: Scrollbar(
-                        //         child: ListView.separated(
-                        //       itemCount: _paths != null && _paths!.isNotEmpty
-                        //           ? _paths!.length
-                        //           : 1,
-                        //       itemBuilder: (BuildContext context, int index) {
-                        //         final bool isMultiPath =
-                        //             _paths != null && _paths!.isNotEmpty;
-                        //         final String name = '$index: ' +
-                        //             (isMultiPath
-                        //                 ? _paths!
-                        //                     .map((e) => e.name)
-                        //                     .toList()[index]
-                        //                 : _fileName ?? '...');
-                        //         final filesize =
-                        //             _paths!.map((e) => e.size).toList()[index];
-                        //         final kb = filesize / 1024;
-                        //         final mb = kb / 1024;
-                        //         final size = (mb >= 1)
-                        //             ? '${mb.toStringAsFixed(2)} MB'
-                        //             : '${kb.toStringAsFixed(2)} KB';
-                        //         return ListTile(
-                        //           title: Text(
-                        //             name,
-                        //           ),
-                        //           subtitle: Text('$size'),
-                        //         );
-                        //       },
-                        //       separatorBuilder:
-                        //           (BuildContext context, int index) =>
-                        //               const Divider(),
-                        //     )),
-                        //   )
-
                         : SizedBox(),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
                     child: Center(
                       child: Container(
                         height: widget().height,
@@ -378,51 +393,6 @@ class _select_videos_screenState extends State<select_videos_screen> {
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 0, bottom: 15),
-                    child: Container(
-                        child: (double.parse(((_paths!
-                                            .map((e) => e.size)
-                                            .toList()
-                                            .reduce((a, b) => a + b)) /
-                                        1024 /
-                                        1024)
-                                    .toStringAsFixed(2)) <=
-                                4)
-                            ? Container(
-                                height: widget().height,
-                                width: widget().width,
-                                child: MaterialButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  color: Color.fromRGBO(22, 97, 207, 10),
-                                  child: Text(
-                                    "Next",
-                                    //  'Add Selected Videos',
-                                    style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.white,
-                                      fontSize: widget().fontsize,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              )
-                            : Container(
-                                height: 50,
-                                width: 350,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.red,
-                                ),
-                                child: Center(
-                                    child: Text(
-                                  "Warning! Total files size must be lower then 900 Mbs",
-                                  style: TextStyle(color: Colors.white),
-                                )),
-                              )),
                   ),
                 ],
               ),
